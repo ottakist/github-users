@@ -37,14 +37,17 @@ const UserInfo = () => {
       color: 'yellow',
     },
   ];
+  
   return <section className='section'>
     <Wrapper className='section-cenrer'>
       {items.map(item=>{
         const {id,icon,label,value,color} = item
         return <article key={id} className='item'>
           <span className={color}>{icon}</span>
+          <div>
           <h3>{value}</h3>
           <p>{label}</p>
+          </div>
         </article>
       })}
     </Wrapper>
@@ -53,6 +56,7 @@ const UserInfo = () => {
 
 const Wrapper = styled.section`
   display: grid;
+  margin: 0 10%;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem 2rem;
   @media (min-width: 640px) {
