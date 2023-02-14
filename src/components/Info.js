@@ -39,7 +39,7 @@ const UserInfo = () => {
   ];
   
   return <section className='section'>
-    <Wrapper className='section-cenrer'>
+    <Wrapper className='section-center'>
       {items.map(item=>{
         const {id,icon,label,value,color} = item
         return <article key={id} className='item'>
@@ -56,7 +56,7 @@ const UserInfo = () => {
 
 const Wrapper = styled.section`
   display: grid;
-  margin: 0 10%;
+  
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 1rem 2rem;
   @media (min-width: 640px) {
