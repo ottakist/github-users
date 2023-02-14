@@ -3,7 +3,27 @@ import { GithubContext } from '../context/context';
 import styled from 'styled-components';
 
 const Followers = () => {
-  return <h2>followers component</h2>;
+  const { followers } = React.useContext(GithubContext);
+
+  return (
+    <Wrapper onBeforeInput={() => 'Followers'}>
+      <div className='followers'>
+        {followers.map((follower) => {
+          const { login, id, avatar_url, html_url } = follower;
+
+          return (
+            <article key={id}>
+              <img src={avatar_url} alt={login} />
+              <div>
+                <h4>{login}</h4>
+                <a href={html_url}>{html_url}</a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
 
 const Wrapper = styled.article`
@@ -30,6 +50,7 @@ const Wrapper = styled.article`
   }
   .followers {
     overflow: scroll;
+    overflow-x: hidden;
     height: 260px;
     display: grid;
     grid-template-rows: repeat(auto-fill, minmax(45px, 1fr));
