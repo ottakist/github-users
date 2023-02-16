@@ -4,22 +4,24 @@ import { GithubContext } from '../context/context';
 import { Pie2D, Column2D, Bar2D, Doughnut2D } from './Charts';
 const Repos = () => {
   const { repos } = React.useContext(GithubContext);
-  const data = [];
+  const forksData = [];
   const starsData = []
-  repos.sort((a, b) => a.forks - b.forks);
-  repos.reverse();
-  const filteredRepo = repos.slice(0, 5);
-  filteredRepo.map((repo) => {
+
+  
+  const forksFilter = repos.sort((a, b) => b.forks - a.forks).slice(0, 5);
+  forksFilter.map((repo) => {
     const { forks, name } = repo;
-    data.push({ label: name, value: forks });
+    forksData.push({ label: name, value: forks });
   });
-  repos.sort((a, b) => a.forks - b.forks);
-  repos.reverse();
-  const StarsRepo = repos.slice(0, 5);
-  filteredRepo.map((repo) => {
+
+const starsFilter = repos.sort(
+  (a, b) => b.stargazers_count - a.stargazers_count
+).slice(0,5);
+  starsFilter.map((repo) => {
     const { stargazers_count, name } = repo;
     starsData.push({ label: name, value: stargazers_count });
   });
+
   let languages = repos.reduce((total, item) => {
     const { language, stargazers_count } = item;
     if (!language) return total;
@@ -40,12 +42,11 @@ const Repos = () => {
 const stars = Object.values(languages)
   .sort((a, b) => b.stars - a.stars)
   .slice(0, 5).map((item)=>{return {...item,value:item.stars}})
-  console.log(stars);
   return (
     <section className='section'>
       <Wrapper className='section-center'>
         <Pie2D data={mostUsed} />
-        <Bar2D data={data} />
+        <Bar2D data={forksData} />
         <Doughnut2D data={stars}/>
         <Column2D data={starsData}/>
       </Wrapper>
