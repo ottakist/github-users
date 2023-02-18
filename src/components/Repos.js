@@ -46,9 +46,9 @@ const stars = Object.values(languages)
     <section className='section'>
       <Wrapper className='section-center'>
         <Pie2D data={mostUsed} />
-        <Bar2D data={forksData} />
-        <Doughnut2D data={stars}/>
         <Column2D data={starsData}/>
+        <Doughnut2D data={stars}/>
+        <Bar2D data={forksData} />
       </Wrapper>
     </section>
   );
